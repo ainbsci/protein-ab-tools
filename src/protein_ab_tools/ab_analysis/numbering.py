@@ -2,10 +2,10 @@ from typing import Literal, Optional
 from anarci import anarci
 
 
-def numbering(seq: str,
-              name: Optional[str] = None,
-              scheme: str = 'imgt',
-              chain: Literal['H', 'L'] = 'H'):
+def ab_numbering(seq: str,
+                 name: Optional[str] = None,
+                 scheme: str = 'imgt',
+                 chain: Literal['H', 'L'] = 'H'):
     """
     Numbering an antibody sequence.
     """
@@ -30,7 +30,7 @@ def extract_regions(seq: str,
     """
     Extract regions from an antibody sequence.
     """
-    result = numbering(seq, scheme=scheme, chain=chain)
+    result = ab_numbering(seq, scheme=scheme, chain=chain)
     if scheme.lower() == 'imgt':
         breakpoint = {
             'fwr1': [1, 27],
