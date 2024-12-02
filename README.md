@@ -13,9 +13,9 @@ Utilities for protein and antibody sequence analysis.
 
 3. Import package
 
-```python
-import protein_ab_tools as pat
-```
+    ```python
+    import protein_ab_tools as pat
+    ```
 
 ## How to use
 
