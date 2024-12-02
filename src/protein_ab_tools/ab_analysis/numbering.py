@@ -2,10 +2,12 @@ from typing import Literal, Optional
 from anarci import anarci
 
 
-def ab_numbering(seq: str,
-                 name: Optional[str] = None,
-                 scheme: str = 'imgt',
-                 chain: Literal['H', 'L'] = 'H'):
+def run_numbering(
+    seq: str,
+    name: Optional[str] = None,
+    scheme: str = 'imgt',
+    chain: Literal['H', 'L'] = 'H',
+):
     """
     Numbering an antibody sequence.
     """
@@ -20,8 +22,14 @@ def ab_numbering(seq: str,
     result = anarci([prep_seq], scheme=scheme, allow=chain)
     if result[0][0] is None:
         raise ValueError(f"Invalid sequence: {seq}")
-
     return result
+
+
+def get_numbered_seq(seq: str,
+                     scheme: str = 'imgt',
+                     chain: Literal['H', 'L'] = 'H'):
+    result = run_numbering(seq, scheme=scheme, chain=chain)
+    return ''.join([aa for _, aa in result[0][0][0][0]])
 
 
 def extract_regions(seq: str,
