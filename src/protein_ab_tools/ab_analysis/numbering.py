@@ -38,7 +38,7 @@ def extract_regions(seq: str,
     """
     Extract regions from an antibody sequence.
     """
-    result = ab_numbering(seq, scheme=scheme, chain=chain)
+    result = run_numbering(seq, scheme=scheme, chain=chain)
     if scheme.lower() == 'imgt':
         breakpoint = {
             'fwr1': [1, 27],
