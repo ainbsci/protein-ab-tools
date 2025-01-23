@@ -7,6 +7,7 @@ def run_numbering(
     name: Optional[str] = None,
     scheme: str = 'imgt',
     chain: Literal['H', 'L'] = 'H',
+    germline: bool = False,
 ):
     """
     Numbering an antibody sequence.
@@ -19,10 +20,20 @@ def run_numbering(
         chain = ['H']
     elif chain == 'L':
         chain = ['K', 'L']
-    result = anarci([prep_seq], scheme=scheme, allow=chain)
+    result = anarci([prep_seq],
+                    scheme=scheme,
+                    allow=chain,
+                    assign_germline=germline)
     if result[0][0] is None:
         raise ValueError(f"Invalid sequence: {seq}")
     return result
+
+
+def extract_species(seq: str,
+                    scheme: str = 'imgt',
+                    chain: Literal['H', 'L'] = 'H'):
+    result = run_numbering(seq, scheme=scheme, chain=chain)
+    return result[0][0][1]['species']
 
 
 def get_numbered_seq(seq: str,
