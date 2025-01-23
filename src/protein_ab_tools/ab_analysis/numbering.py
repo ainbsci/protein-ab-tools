@@ -1,4 +1,4 @@
-from typing import Literal, Optional
+from typing import Literal, Optional, List
 from anarci import anarci
 
 
@@ -8,6 +8,7 @@ def run_numbering(
     scheme: str = 'imgt',
     chain: Literal['H', 'L'] = 'H',
     germline: bool = False,
+    species: Optional[List[str]] = None,
 ):
     """
     Numbering an antibody sequence.
@@ -20,10 +21,12 @@ def run_numbering(
         chain = ['H']
     elif chain == 'L':
         chain = ['K', 'L']
-    result = anarci([prep_seq],
-                    scheme=scheme,
-                    allow=chain,
-                    assign_germline=germline)
+    result = anarci(
+        [prep_seq],
+        scheme=scheme,
+        allow=chain,
+        assign_germline=germline,
+        allowed_species=species if species is not None else ['human', 'mouse'])
     if result[0][0] is None:
         raise ValueError(f"Invalid sequence: {seq}")
     return result
