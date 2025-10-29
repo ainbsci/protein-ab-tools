@@ -1,5 +1,21 @@
 from typing import Literal, Optional, List
-from anarci import anarci
+
+# Try to import anarci, but make it optional for testing
+try:
+    from anarci import anarci
+    ANARCI_AVAILABLE = True
+except ImportError:
+    ANARCI_AVAILABLE = False
+    anarci = None
+
+
+def _check_anarci():
+    """Check if anarci is available and raise helpful error if not."""
+    if not ANARCI_AVAILABLE:
+        raise ImportError(
+            "anarci is required but not installed. "
+            "Please install it via conda: conda install -c bioconda anarci"
+        )
 
 
 def run_numbering(
@@ -13,6 +29,7 @@ def run_numbering(
     """
     Numbering an antibody sequence.
     """
+    _check_anarci()
     seq = seq.strip().replace('-', '')
     if name is None:
         name = f'{chain}-{scheme}'
