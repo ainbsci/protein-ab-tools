@@ -4,12 +4,32 @@ Utilities for protein and antibody sequence analysis.
 
 ## Installation
 
-1. Install `biopython` and `anarci`
-2. Run below.
+### Option 1: Using Conda (Recommended)
 
+1. Create and activate the conda environment:
+    ```sh
+    conda env create -f conda-env.yaml
+    conda activate protein-tools
+    ```
+
+2. Install the package:
     ```sh
     pip install git+https://github.com/ainbsci/protein-ab-tools.git
     ```
+
+### Option 2: Manual Installation
+
+1. Install `anarci` via conda (required dependency):
+    ```sh
+    conda install -c bioconda anarci
+    ```
+
+2. Install the package:
+    ```sh
+    pip install git+https://github.com/ainbsci/protein-ab-tools.git
+    ```
+
+**Note:** `anarci` must be installed via conda from the bioconda channel due to its complex dependencies (HMMER, muscle). It cannot be installed via pip.
 
 3. Import package
 
