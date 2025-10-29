@@ -90,7 +90,7 @@ def extract_regions(seq: str,
             'cdr1': [31, 35] if chain == 'H' else [24, 34],
             'fwr2': [36, 49] if chain == 'H' else [35, 49],
             'cdr2': [50, 65] if chain == 'H' else [50, 56],
-            'fwr3': [64, 94] if chain == 'H' else [57, 88],
+            'fwr3': [66, 94] if chain == 'H' else [57, 88],
             'cdr3': [95, 102] if chain == 'H' else [89, 97],
             'fwr4': [103, 146] if chain == 'H' else [98, 146]
         }
