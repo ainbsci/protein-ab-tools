@@ -9,6 +9,9 @@ authors = [{ name = "Seung-woo Seo", email = "sw32.seo@gmail.com" }]
 description = "Tools for protein and antibody sequence analysis"
 readme = "README.md"
 requires-python = ">=3.10"
+# Note: anarci is a required runtime dependency but must be installed separately
+# via conda (bioconda channel) due to complex build requirements (HMMER, muscle).
+# See README.md for installation instructions.
 dependencies = ["biopython"]
 
 [project.optional-dependencies]
