@@ -53,7 +53,7 @@ def extract_species(seq: str,
                     scheme: str = 'imgt',
                     chain: Literal['H', 'L'] = 'H'):
     result = run_numbering(seq, scheme=scheme, chain=chain)
-    return result[0][0][1]['species']
+    return result[1][0][0]['species']
 
 
 def get_numbered_seq(seq: str,
