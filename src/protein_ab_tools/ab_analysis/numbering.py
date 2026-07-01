@@ -38,6 +38,8 @@ def run_numbering(
         chain = ['H']
     elif chain == 'L':
         chain = ['K', 'L']
+    # AbM uses Martin numbering under the hood (anarci calls it 'martin')
+    scheme = 'martin' if scheme.lower() == 'abm' else scheme.lower()
     result = anarci(
         [prep_seq],
         scheme=scheme,
@@ -91,7 +93,8 @@ def extract_regions(seq: str,
             'cdr3': [107, 138],
             'fwr4': [139, 149] if chain == 'H' else [139, 148]
         }
-    elif scheme.lower() == 'chothia':
+    elif scheme.lower() in ('chothia', 'abm', 'martin'):
+        # AbM uses Martin numbering with Chothia CDR index ranges
         breakpoint = {
             'fwr1': [1, 25] if chain == 'H' else [1, 23],
             'cdr1': [26, 32] if chain == 'H' else [24, 34],
