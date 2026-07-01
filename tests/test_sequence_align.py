@@ -2,6 +2,7 @@
 Tests for sequence alignment functionality.
 """
 import pytest
+from protein_ab_tools.align import sequence_align
 from protein_ab_tools.align.sequence_align import calc_percent_similarity
 
 
@@ -132,3 +133,25 @@ class TestCalcPercentSimilarity:
         # Same sequence should have 100% similarity
         similarity_heavy = calc_percent_similarity(heavy, heavy)
         assert similarity_heavy == 100.0
+
+    def test_reuses_aligner_across_calls(self, monkeypatch):
+        """calc_percent_similarity must not construct a new PairwiseAligner
+        per call — that setup cost is identical every time and dominates
+        runtime when called millions of times in a hot loop (e.g. exact
+        similarity scoring over a whole sequence corpus)."""
+        build_count = 0
+        real_aligner_cls = sequence_align.PairwiseAligner
+
+        class CountingAligner(real_aligner_cls):
+            def __init__(self, *args, **kwargs):
+                nonlocal build_count
+                build_count += 1
+                super().__init__(*args, **kwargs)
+
+        monkeypatch.setattr(sequence_align, "PairwiseAligner", CountingAligner)
+        sequence_align._get_aligner.cache_clear()
+
+        for _ in range(5):
+            calc_percent_similarity('MALWMRLLPLL', 'MALWMRLLPLL', mode='blastp')
+
+        assert build_count == 1
