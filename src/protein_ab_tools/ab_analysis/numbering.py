@@ -102,7 +102,7 @@ def extract_regions(seq: str,
             'cdr2': [52, 56] if chain == 'H' else [50, 56],
             'fwr3': [57, 94] if chain == 'H' else [57, 88],
             'cdr3': [95, 102] if chain == 'H' else [89, 97],
-            'fwr4': [103, 113] if chain == 'H' else [98, 107]
+            'fwr4': [103, 113] if chain == 'H' else [98, 109]
         }
     elif scheme.lower() == 'kabat':
         breakpoint = {
@@ -112,7 +112,7 @@ def extract_regions(seq: str,
             'cdr2': [50, 65] if chain == 'H' else [50, 56],
             'fwr3': [66, 94] if chain == 'H' else [57, 88],
             'cdr3': [95, 102] if chain == 'H' else [89, 97],
-            'fwr4': [103, 113] if chain == 'H' else [98, 107]
+            'fwr4': [103, 113] if chain == 'H' else [98, 109]
         }
     elif scheme.lower() in ('abm', "martin"):
         breakpoint = {
@@ -122,7 +122,7 @@ def extract_regions(seq: str,
             'cdr2': [50, 58] if chain == 'H' else [50, 56],
             'fwr3': [59, 94] if chain == 'H' else [57, 88],
             'cdr3': [95, 102] if chain == 'H' else [89, 97],
-            'fwr4': [103, 113] if chain == 'H' else [98, 107]
+            'fwr4': [103, 113] if chain == 'H' else [98, 110]
         }
     else:
         raise ValueError('Invalid numbering scheme')
